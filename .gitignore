@@ -1,0 +1,7 @@
+**/*.pyc
+**/*.pydevproject
+**/*.project
+**/*.settings
+**/*-ubyte
+**/zipped
+*.tar.gz
