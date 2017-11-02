@@ -2,7 +2,7 @@
 """
 Created on  
 
-@author: fame
+@author: arindam roychoudhury
 """
 
 import numpy as np 
