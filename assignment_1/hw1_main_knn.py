@@ -105,14 +105,25 @@ def test_fold(X_fold, y_fold, k = 1):
         max_accuracy = max([max_accuracy, np.mean(y_test_pred==y_test)])
     return max_accuracy
 
+def plot_accuracies(k_acc, k_labels):
+    # plot the trend line with error bars that correspond to standard deviation
+    plt.plot(k_labels,k_acc)
+    plt.title('Best k')
+    plt.xlabel('k')
+    plt.ylabel('accuracy')
+    plt.show()
+
 def find_best_k(X_fold, y_fold, Ks):
     max_acc = 0
     best_k = Ks[0]
+    k_acc = []
     for k in Ks:
         acc = test_fold(X_fold, y_fold, k)
+        k_acc.append(acc)
         if acc > max_acc:
             max_acc = acc
             best_k = k
+    plot_accuracies(k_acc, Ks)
     return best_k, max_acc
 
 
@@ -174,14 +185,12 @@ if __name__ == '__main__':
     print "best k in 1000 examples:"
     print k_1000, acc_1000 * 100.0
       
-    X_fold, y_fold = make_folds(X_train, y_train, 5)
-      
     t1 = time.time()
     C_a, acc = test_data(X_train, y_train, X_test, y_test, k_1000)
     t2 = time.time()
     C_b, acc_1 = test_data(X_train, y_train, X_test, y_test, 1)
     t3 = time.time()
-      
+       
     print "all examples:"
     print "for best k:"
     print k, acc, (t2-t1) * 1000.0
